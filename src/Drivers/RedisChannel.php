@@ -8,7 +8,7 @@ use Pollsockets\PollsocketsChannel;
 class RedisChannel extends PollsocketsChannel
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function poll(): array
     {

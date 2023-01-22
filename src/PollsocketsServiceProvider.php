@@ -15,11 +15,11 @@ class PollsocketsServiceProvider extends PackageServiceProvider
         $package
             ->name('pollsockets')
             ->hasConfigFile('pollsockets')
-			->hasRoute('pollsockets')
-			->hasInstallCommand(fn(InstallCommand $command) => $command
-				->publishConfigFile()
-				->askToStarRepoOnGitHub('pollsockets/pollsockets-laravel')
-			);
+            ->hasRoute('pollsockets')
+            ->hasInstallCommand(fn (InstallCommand $command) => $command
+                ->publishConfigFile()
+                ->askToStarRepoOnGitHub('pollsockets/pollsockets-laravel')
+            );
     }
 
     public function packageBooted(): void
@@ -27,15 +27,15 @@ class PollsocketsServiceProvider extends PackageServiceProvider
         $this->app->bind(PollsocketsChannel::class, function (Application $app, array $parameters) {
             $driver = config('pollsockets.driver');
 
-			if (!is_string($driver)) {
-				throw InvalidPollsocketsChannelDriverException::notAString();
-			}
+            if (! is_string($driver)) {
+                throw InvalidPollsocketsChannelDriverException::notAString();
+            }
 
-			if (!is_a($driver, PollsocketsChannel::class, true)) {
+            if (! is_a($driver, PollsocketsChannel::class, true)) {
                 throw InvalidPollsocketsChannelDriverException::invalidDriver();
             }
 
-			return new $driver(...$parameters);
+            return new $driver(...$parameters);
         });
     }
 }

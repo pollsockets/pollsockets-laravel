@@ -7,11 +7,11 @@ use Pollsockets\Pollsockets;
 class PollsocketsController
 {
     /**
-     * @param string $channelName
+     * @param  string  $channelName
      * @return array<string, int>
      */
-	public function poll(string $channelName): array
-	{
-		return Pollsockets::channel($channelName)->poll();
-	}
+    public function poll(string $channelName): array
+    {
+        return Pollsockets::channel($channelName)->poll();
+    }
 }

@@ -32,20 +32,20 @@ it('throws exception when channel driver is not a valid class', function () {
 })->throws(InvalidPollsocketsChannelDriverException::class, InvalidPollsocketsChannelDriverException::MESSAGE_INVALID_DRIVER);
 
 it('can poll a channel', function () {
-    $fakeChannel = $this->mock(PollsocketsChannel::class, fn(MockInterface $mock) => $mock
+    $fakeChannel = $this->mock(PollsocketsChannel::class, fn (MockInterface $mock) => $mock
         ->shouldReceive('poll')
         ->once()
         ->andReturn(['test' => 1])
     );
 
-    $this->app->bind(PollsocketsChannel::class, fn() => $fakeChannel);
+    $this->app->bind(PollsocketsChannel::class, fn () => $fakeChannel);
 
     $channel = Pollsockets::channel('test-channel');
     $this->assertIsArray($channel->poll());
 });
 
 it('can publish to a channel', function () {
-    $fakeChannel = $this->mock(PollsocketsChannel::class, fn(MockInterface $mock) => $mock
+    $fakeChannel = $this->mock(PollsocketsChannel::class, fn (MockInterface $mock) => $mock
         ->shouldReceive('publish')
         ->once()
         ->with('test-message')

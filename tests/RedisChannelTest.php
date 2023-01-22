@@ -1,7 +1,7 @@
 <?php
 
-use Pollsockets\Drivers\RedisChannel;
 use Illuminate\Support\Facades\Redis;
+use Pollsockets\Drivers\RedisChannel;
 
 it('can build redis key', function () {
     $channel = new RedisChannel('test-channel');
@@ -33,6 +33,3 @@ it('can publish and poll redis channel', function () {
 
     expect($channel->poll())->toBe(['test-message' => time() + 5, 'test-message2' => time() + 5]);
 });
-
-
-
