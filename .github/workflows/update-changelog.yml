@@ -12,6 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
+          token: ${{ secrets.CHANGELOG_KEY }}
           ref: main
 
       - name: Update Changelog
@@ -25,4 +26,5 @@ jobs:
         with:
           branch: main
           commit_message: Update CHANGELOG
+          push_options: --force
           file_pattern: CHANGELOG.md
