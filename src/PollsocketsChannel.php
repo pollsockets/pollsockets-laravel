@@ -4,9 +4,7 @@ namespace Pollsockets;
 
 abstract class PollsocketsChannel
 {
-    public function __construct(public string $channelName)
-    {
-    }
+    public function __construct(public string $channelName) {}
 
     /**
      * @return array<string, int>

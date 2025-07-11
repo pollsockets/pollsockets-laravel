@@ -12,7 +12,7 @@ class RedisChannel extends PollsocketsChannel
      */
     public function poll(): array
     {
-        return Redis::zrangebyscore($this->redisKey(), time(), '+inf', ['withscores' => true]);
+        return Redis::zrangebyscore($this->redisKey(), (string) time(), '+inf', ['withscores' => true]); // @phpstan-ignore-line return.type
     }
 
     public function publish(string $message): void
