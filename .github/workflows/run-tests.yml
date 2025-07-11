@@ -21,13 +21,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, soap, intl, exif, fileinfo, pvoc
+          tools: pie
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, soap, intl, exif, fileinfo, pcov
           coverage: pcov
 
       - name: Setup problem matchers
