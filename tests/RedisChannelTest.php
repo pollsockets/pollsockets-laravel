@@ -6,7 +6,7 @@ use Pollsockets\Drivers\RedisChannel;
 it('can build redis key', function () {
     $channel = new RedisChannel('test-channel');
 
-    //use reflection to call protected method redisKey()
+    // use reflection to call protected method redisKey()
     $method = new ReflectionMethod(RedisChannel::class, 'redisKey');
 
     expect($method->invoke($channel))->toBe('pollsockets.test-channel');
