@@ -11,5 +11,5 @@ abstract class PollsocketsChannel
      */
     abstract public function poll(): array;
 
-    abstract public function publish(string $message): void;
+    abstract public function publish(string $message, int $delta = 5): void;
 }
