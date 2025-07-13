@@ -14,5 +14,5 @@ class FakeChannel extends PollsocketsChannel
         return [];
     }
 
-    public function publish(string $message): void {}
+    public function publish(string $message, int $delta = 5): void {}
 }
