@@ -185,6 +185,8 @@ keeps the session alive while the tab is open.
 - `publish($message, $delta)` is now `publish($event)`. Remove the `$delta` argument. Events no longer expire
   after `$delta` seconds. The next publish to the channel prunes events older than `retention` seconds.
 - Event names must not be empty or contain `|`.
+- `Pollsockets::channel()` now throws an `InvalidArgumentException` for a channel name that does not match
+  `[A-Za-z0-9_.:-]+`. In v1 any string was accepted. Rename channels that contain other characters, such as spaces or `/`.
 - The poll response changed from `{"event": <unix seconds>}` to `{"time": <ms>, "events": {"event|origin": <ms>}}`,
   and the route accepts a `since` query parameter. Upgrade the client to pollsockets-js 2.x at the same time.
 - Custom drivers must implement `publish(string $event): void` and `poll(?int $since = null): array`.
