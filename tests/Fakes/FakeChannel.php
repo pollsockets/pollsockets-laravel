@@ -6,13 +6,13 @@ use Pollsockets\PollsocketsChannel;
 
 class FakeChannel extends PollsocketsChannel
 {
+    public function publish(string $event): void {}
+
     /**
      * {@inheritDoc}
      */
-    public function poll(): array
+    public function poll(?int $since = null): array
     {
         return [];
     }
-
-    public function publish(string $message, int $delta = 5): void {}
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Date;
 use Mockery\MockInterface;
 use Pollsockets\Exceptions\InvalidPollsocketsChannelDriverException;
 use Pollsockets\Pollsockets;
@@ -48,7 +49,7 @@ it('can publish to a channel', function () {
     $fakeChannel = $this->mock(PollsocketsChannel::class, fn (MockInterface $mock) => $mock
         ->shouldReceive('publish')
         ->once()
-        ->with('test-message')
+        ->with('test-event')
     );
 
     $this->app->bind(PollsocketsChannel::class, function () use ($fakeChannel) {
@@ -56,5 +57,24 @@ it('can publish to a channel', function () {
     });
 
     $channel = Pollsockets::channel('test-channel');
-    $channel->publish('test-message');
+    $channel->publish('test-event');
 });
+
+it('returns the current time in milliseconds', function () {
+    Date::setTestNow(Date::createFromTimestampMs(1791288000124));
+
+    expect(Pollsockets::now())->toBe(1791288000124);
+});
+
+it('accepts valid channel names', function (string $channelName) {
+    expect(Pollsockets::channel($channelName)->channelName)->toBe($channelName);
+})->with(['team.1:user_2-a', 'a']);
+
+it('rejects invalid channel names', function (string $channelName) {
+    Pollsockets::channel($channelName);
+})->with([
+    'empty' => '',
+    'space' => 'bad channel',
+    'pipe' => 'bad|channel',
+    'trailing newline' => "channel\n",
+])->throws(InvalidArgumentException::class);
