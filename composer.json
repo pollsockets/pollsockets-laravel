@@ -36,8 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Pollsockets\\": "src",
-            "Pollsockets\\Pollsockets\\Database\\Factories\\": "database/factories"
+            "Pollsockets\\": "src"
         }
     },
     "autoload-dev": {
@@ -63,10 +62,7 @@
         "laravel": {
             "providers": [
                 "\\Pollsockets\\PollsocketsServiceProvider"
-            ],
-            "aliases": {
-                "Pollsockets": "\\Pollsockets\\Facades\\Pollsockets"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
